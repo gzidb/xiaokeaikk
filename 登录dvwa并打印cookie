@@ -1,0 +1,18 @@
+import requests #导入模块
+from http import cookiejar #导入模块
+postdata = {
+    'username':'admin',
+    'password':'password'
+}#要post的内容
+headers = {
+    'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0'
+}#带的请求头
+url = 'http://127.0.0.1/DVWA/login.php'#访问的url
+qingqiu = requests.post(url,data=postdata,headers=headers)#qingqiu函数通过requests.post方法进行登录
+cookies = requests.utils.dict_from_cookiejar(qingqiu.cookies)#cookies函数通过requests.utils.dict_from_cookiejar转换请求网站的cookie
+print(cookies)#打印cookies
+for key in cookies.keys(): #从转换的cookie列表循环
+    print(key,cookies.get(key))#打印cookie的名称 值
+    print(qingqiu.status_code)#打印该请求的状态码
+    print(key)#打印coookie名称
+    break #结束该循环
